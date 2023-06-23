@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { Text, Button } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
+import Layout from "../components/Layout";
 
 interface SavedProps {
   navigation: NavigationProp<any>;
@@ -8,13 +9,13 @@ interface SavedProps {
 
 const SavedScreen = ({ navigation }: SavedProps) => {
   return (
-    <View>
+    <Layout>
       <Text>Saved</Text>
       <Button
         title="Some collection"
         onPress={() => navigation.navigate("CollectionScreen")}
       />
-    </View>
+    </Layout>
   );
 };
 

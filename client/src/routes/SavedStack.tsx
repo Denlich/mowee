@@ -8,7 +8,11 @@ const Stack = createNativeStackNavigator();
 
 const SavedStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="SavedScreen" component={SavedScreen} />
       <Stack.Screen name="CollectionScreen" component={CollectionScreen} />
       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
