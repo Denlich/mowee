@@ -10,11 +10,23 @@ import {
   TabNavigationState,
 } from "@react-navigation/native";
 
+import Icon from "react-native-vector-icons/MaterialIcons";
+
 interface Props {
   state: TabNavigationState<ParamListBase>;
   descriptors: BottomTabDescriptorMap;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
 }
+
+interface Icons {
+  [key: string]: string;
+}
+
+const icons: Icons = {
+  Home: "local-movies",
+  Saved: "bookmark-outline",
+  Profile: "person-outline",
+};
 
 const index = ({ state, descriptors, navigation }: Props) => {
   return (
@@ -27,12 +39,6 @@ const index = ({ state, descriptors, navigation }: Props) => {
     >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
 
         const isFocused = state.index === index;
 
@@ -63,12 +69,14 @@ const index = ({ state, descriptors, navigation }: Props) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1, alignItems: "center" }}
+            style={{ flex: 1, alignItems: "center", paddingVertical: 20 }}
             key={index}
           >
-            <Text style={{ color: isFocused ? "#673ab7" : "#222" }}>
-              {label}
-            </Text>
+            <Icon
+              name={icons[route.name]}
+              size={24}
+              color={isFocused ? "#000" : "#999999"}
+            />
           </TouchableOpacity>
         );
       })}
