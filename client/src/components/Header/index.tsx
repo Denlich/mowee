@@ -1,28 +1,21 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { NavigationProp } from "@react-navigation/native";
 
 import Logo from "./Logo";
+import Search from "./Search";
+import Screen from "../Screen";
 
-const index = () => {
+interface Props {
+  navigation: NavigationProp<any>;
+}
+
+const index = ({ navigation }: Props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <Screen>
       <Logo />
-      <Icon name="search" size={24} color="#000" />
-    </SafeAreaView>
+      <Search navigation={navigation} />
+    </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: StatusBar.currentHeight,
-    paddingHorizontal: 40,
-    paddingVertical: 20,
-  },
-});
 
 export default index;

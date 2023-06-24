@@ -2,16 +2,18 @@ import React, { ReactNode } from "react";
 import { View } from "react-native";
 
 import Header from "./Header";
+import { NavigationProp } from "@react-navigation/native";
 
-interface LayoutProps {
+interface Props {
   children: ReactNode;
+  navigation: NavigationProp<any>;
 }
 
-const index = ({ children }: LayoutProps) => {
+const index = ({ children, navigation }: Props) => {
   return (
     <View style={{ flex: 1 }}>
-      <Header />
-      <View style={{ flex: 1 }}>{children}</View>
+      <Header navigation={navigation} />
+      <View style={{ flex: 1, paddingHorizontal: 40 }}>{children}</View>
     </View>
   );
 };

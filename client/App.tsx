@@ -1,5 +1,5 @@
 import { useFonts } from "expo-font";
-import TabNavigation from "./src/routes/TavNavigation";
+import RootNavigation from "./src/routes/RootNavigation";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -11,5 +11,5 @@ export default function App() {
     return null;
   }
 
-  return <TabNavigation />;
+  return <RootNavigation />;
 }
