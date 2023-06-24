@@ -35,6 +35,7 @@ const index = ({ state, descriptors, navigation }: Props) => {
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 40,
+        backgroundColor: "#fff",
       }}
     >
       {state.routes.map((route, index) => {
@@ -61,6 +62,17 @@ const index = ({ state, descriptors, navigation }: Props) => {
           });
         };
 
+        let alignmentStyle = {};
+        if (index === 0) {
+          alignmentStyle = {
+            alignItems: "flex-start",
+          };
+        } else if (index === 1) {
+          alignmentStyle = { alignItems: "center" };
+        } else if (index === 2) {
+          alignmentStyle = { alignItems: "flex-end" };
+        }
+
         return (
           <TouchableOpacity
             accessibilityRole="button"
@@ -69,7 +81,7 @@ const index = ({ state, descriptors, navigation }: Props) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1, alignItems: "center", paddingVertical: 20 }}
+            style={[{ flex: 1, paddingVertical: 20 }, alignmentStyle]}
             key={index}
           >
             <Icon
