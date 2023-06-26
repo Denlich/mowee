@@ -6,6 +6,7 @@ import {
   Dimensions,
   View,
 } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
 
 import Movie from "../entities/Movie";
 
@@ -13,17 +14,22 @@ const height = Dimensions.get("window").height;
 
 interface Props {
   item: Movie;
+  navigation: NavigationProp<any>;
 }
 
-const CardItem = ({ item }: Props) => {
+const CardItem = ({ item, navigation }: Props) => {
   return (
-    <TouchableWithoutFeedback onPress={() => {}}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate("DetailsScreen", item.imdbID)}
+    >
       <View style={styles.card}>
-        <Image
-          source={{ uri: item.Poster }}
-          resizeMode="cover"
-          style={{ flex: 1 }}
-        />
+        {item.Poster ? (
+          <Image
+            source={{ uri: item.Poster }}
+            resizeMode="cover"
+            style={{ flex: 1 }}
+          />
+        ) : null}
       </View>
     </TouchableWithoutFeedback>
   );

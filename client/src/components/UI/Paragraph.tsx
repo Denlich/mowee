@@ -1,15 +1,19 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, TextStyle } from "react-native";
 
-interface TextProps {
-  children: String;
+interface Props {
+  children: string | string[];
+  styles?: TextStyle;
+  color?: "black" | "grey";
 }
 
-const Paragraph = ({ children }: TextProps) => {
-  return <Text style={styles.text}>{children}</Text>;
+const Paragraph = ({ children, color = "black", styles }: Props) => {
+  return (
+    <Text style={[localStyls.text, { color: color }, styles]}>{children}</Text>
+  );
 };
 
-const styles = StyleSheet.create({
+const localStyls = StyleSheet.create({
   text: {
     fontFamily: "Montserrat",
     fontSize: 16,

@@ -34,7 +34,7 @@ const SearchScreen = ({ navigation }: Props) => {
         onSubmit={search}
         onChangeText={onChangeText}
       />
-      <SearchResultList movies={movies} />
+      <SearchResultList movies={movies} navigation={navigation} />
     </View>
   );
 };

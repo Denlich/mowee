@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
-interface TextProps {
-  children: String;
+interface Props {
+  children: string;
 }
 
-const Heading = ({ children }: TextProps) => {
+const Heading = ({ children }: Props) => {
   return <Text style={styles.text}>{children}</Text>;
 };
 

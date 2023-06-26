@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import SearchScreen from "../pages/SearchScreen";
 import TabNavigator from "./TabNavigator";
+import DetailsScreen from "../pages/DetailsScreen";
 
 const RootStack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const TabNavigation = () => {
         </RootStack.Group>
         <RootStack.Group screenOptions={{ presentation: "modal" }}>
           <RootStack.Screen name="Search" component={SearchScreen} />
+          <RootStack.Screen name="DetailsScreen" component={DetailsScreen} />
         </RootStack.Group>
       </RootStack.Navigator>
     </NavigationContainer>
