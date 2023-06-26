@@ -1,6 +1,8 @@
 import { useFonts } from "expo-font";
-import RootNavigation from "./src/routes/RootNavigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import RootNavigation from "./src/routes/RootNavigation";
+import AuthNavigation from "./src/routes/AuthNavigation";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +18,8 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RootNavigation />
+      {/* <RootNavigation /> */}
+      <AuthNavigation />
     </QueryClientProvider>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, TextStyle } from "react-native";
+import { Text, StyleSheet, TextStyle, StyleProp } from "react-native";
 
 interface Props {
   children: string | string[];
-  styles?: TextStyle;
+  styles?: StyleProp<TextStyle>;
   color?: "black" | "grey";
 }
 
