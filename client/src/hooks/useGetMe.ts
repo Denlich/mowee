@@ -2,7 +2,7 @@ import User from "../entities/User";
 import APIClient from "../services/api-client";
 import { useQuery } from "@tanstack/react-query";
 
-const apiClient = new APIClient<User>("/getMe");
+const apiClient = new APIClient<User>("/user/getMe");
 
 const useGetMe = () => {
   return useQuery({

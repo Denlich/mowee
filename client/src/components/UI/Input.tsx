@@ -10,7 +10,7 @@ interface Props {
   styles?: StyleProp<TextStyle>;
   secureTextEntry?: boolean;
   value?: string;
-  onBlur: Noop;
+  onBlur?: Noop;
 }
 
 const Input = forwardRef<TextInput, Props>(

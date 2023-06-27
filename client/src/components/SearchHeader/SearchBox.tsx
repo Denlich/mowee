@@ -27,6 +27,7 @@ const SearchBox = forwardRef<TextInput, Props>(
           onSubmit={onSubmit}
           onChangeText={onChangeText}
           placeholder="Search for some movie"
+          styles={{ flex: 1 }}
         />
         <Icon name="search" size={24} color="#000" style={{ marginLeft: 10 }} />
       </View>

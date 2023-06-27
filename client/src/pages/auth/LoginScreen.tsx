@@ -84,7 +84,7 @@ const LoginScreen = () => {
         color="grey"
         style={{ marginTop: 40 }}
       >
-        Sign up
+        Log in
       </AuthButton>
     </View>
   );
