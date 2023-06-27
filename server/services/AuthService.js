@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { genearateToken } from "../services/TokenService.js";
 import UserModel from "../models/User.js";
-import UserDto from "../DTOs/UserDto.js";
+import UserDto from "../dtos/UserDto.js";
 import AuthErorr from "../errors/AuthError.js";
 
 class AuthService {
