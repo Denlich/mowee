@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import RootNavigation from "./src/routes/RootNavigation";
 import AuthNavigation from "./src/routes/AuthNavigation";
+import authStore from "./src/stores/auth-store";
+import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 
@@ -12,14 +14,24 @@ export default function App() {
     YesevaOne: require("./assets/fonts/YesevaOne.ttf"),
   });
 
+  const [token, setToken] = useState(authStore.getState().token);
+
+  useEffect(() => {
+    const unsubscribe = authStore.subscribe(() => {
+      setToken(authStore.getState().token);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   if (!fontsLoaded) {
     return null;
   }
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <RootNavigation /> */}
-      <AuthNavigation />
+      {token ? <RootNavigation /> : <AuthNavigation />}
     </QueryClientProvider>
   );
 }

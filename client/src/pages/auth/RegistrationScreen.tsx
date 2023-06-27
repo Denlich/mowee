@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../../components/UI/Input";
 import AuthButton from "../../components/UI/AuthButton";
 import Paragraph from "../../components/UI/Paragraph";
+import APIClient from "../../services/api-client";
+import authStore from "../../stores/auth-store";
 
 const schema = z.object({
   name: z
@@ -23,6 +25,8 @@ const schema = z.object({
     .max(1024, "Password must have leass than 1024 characters"),
 });
 
+const apiClient = new APIClient("/auth/registration");
+
 type FormData = z.infer<typeof schema>;
 
 const RegistrationScreen = () => {
@@ -32,8 +36,13 @@ const RegistrationScreen = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const onSignup = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      const response = await apiClient.auth({ ...data });
+      authStore.getState().setToken(response.userToken);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -92,7 +101,7 @@ const RegistrationScreen = () => {
         </Paragraph>
       )}
       <AuthButton
-        onPress={handleSubmit(onSignup)}
+        onPress={handleSubmit(onSubmit)}
         color="grey"
         style={{ marginTop: 40 }}
       >

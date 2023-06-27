@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: "https://mowee.onrender.com",
 });
 
 class APIClient<T> {
@@ -11,11 +11,8 @@ class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  auth = (config: AxiosRequestConfig) => {
-    return axiosInstance
-      .post(this.endpoint, config)
-      .then((res) => res.data)
-      .catch((err) => err);
+  auth = (config: any) => {
+    return axiosInstance.post(this.endpoint, config).then((res) => res.data);
   };
 }
 
