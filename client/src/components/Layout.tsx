@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 
 import Header from "./Header";
 import { NavigationProp } from "@react-navigation/native";
@@ -7,13 +7,16 @@ import { NavigationProp } from "@react-navigation/native";
 interface Props {
   children: ReactNode;
   navigation: NavigationProp<any>;
+  styles?: StyleProp<ViewStyle>;
 }
 
-const index = ({ children, navigation }: Props) => {
+const index = ({ children, navigation, styles }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <Header navigation={navigation} />
-      <View style={{ flex: 1, paddingHorizontal: 40 }}>{children}</View>
+      <View style={[{ flex: 1, paddingHorizontal: 40 }, styles]}>
+        {children}
+      </View>
     </View>
   );
 };

@@ -4,6 +4,14 @@ const axiosInstance = axios.create({
   baseURL: "https://mowee.onrender.com",
 });
 
+axiosInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
+});
+
 class APIClient<T> {
   endpoint: string;
 
@@ -13,6 +21,10 @@ class APIClient<T> {
 
   auth = (config: any) => {
     return axiosInstance.post(this.endpoint, config).then((res) => res.data);
+  };
+
+  getMe = () => {
+    return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
   };
 }
 
