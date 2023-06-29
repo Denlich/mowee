@@ -1,5 +1,5 @@
 import UserDto from "../dtos/UserDto.js";
-import AuthErorr from "../errors/AuthError.js";
+import ApiErorr from "../errors/ApiError.js";
 import UserModel from "../models/User.js";
 
 class UserController {
@@ -9,7 +9,7 @@ class UserController {
 
       if (!user) {
         return next(
-          AuthErorr.BadRequest("User with this username doesn't existe")
+          ApiErorr.BadRequest("User with this username doesn't existe")
         );
       }
 
@@ -17,7 +17,7 @@ class UserController {
       res.json(userDto);
     } catch (e) {
       console.log(e);
-      return next(new AuthErorr(500, "Some error on server", e.array()));
+      return next(new ApiErorr(500, "Some error on server", e.array()));
     }
   };
 }

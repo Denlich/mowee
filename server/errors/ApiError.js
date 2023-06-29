@@ -1,4 +1,4 @@
-export default class AuthErorr extends Error {
+export default class ApiError extends Error {
   status;
   errors;
 

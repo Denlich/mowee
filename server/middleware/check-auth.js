@@ -17,7 +17,6 @@ export default (req, res, next) => {
       });
     }
   } else {
-    console.log(e);
     return res.status(403).json({
       message: "No access",
     });

@@ -1,8 +1,8 @@
-import AuthErorr from "../errors/AuthError.js";
+import ApiErorr from "../errors/ApiError.js";
 
 export default (err, req, res, next) => {
   console.log(err);
-  if (err instanceof AuthErorr) {
+  if (err instanceof ApiErorr) {
     return res
       .status(err.status)
       .json({ message: err.message, errors: err.errors });

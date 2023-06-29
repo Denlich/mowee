@@ -1,13 +1,13 @@
 import { validationResult } from "express-validator";
 import AuthService from "../services/AuthService.js";
-import AuthErorr from "../errors/AuthError.js";
+import ApiErorr from "../errors/ApiError.js";
 
 class AuthController {
   registarion = async (req, res, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return next(AuthErorr.BadRequest("Validation error", errors.array()));
+        return next(ApiErorr.BadRequest("Validation error", errors.array()));
       }
 
       const { name, username, password } = req.body;
@@ -26,7 +26,7 @@ class AuthController {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return next(AuthErorr.BadRequest("Validation error", errors.array()));
+        return next(ApiErorr.BadRequest("Validation error", errors.array()));
       }
 
       const { username, password } = req.body;

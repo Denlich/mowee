@@ -1,7 +1,12 @@
 import { Schema, model } from "mongoose";
 
 const movieSchema = Schema({
-  title: {
+  imdbID: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  poster: {
     type: String,
     required: true,
   },
