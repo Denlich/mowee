@@ -3,10 +3,9 @@ import ApiError from "../errors/ApiError.js";
 import MovieModel from "../models/Movie.js";
 
 class MovieController {
-  save = async (req, res) => {
+  save = async (req, res, next) => {
     try {
-      const { imdbID } = req.params;
-      const { poster } = req.body;
+      const { imdbID, poster } = req.body;
       const userId = req.userId;
       const result = await MovieService.save(imdbID, poster, userId);
       return res.status(200).json(result);

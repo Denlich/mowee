@@ -6,6 +6,6 @@ import checkAuth from "../middleware/check-auth.js";
 const movieRouter = new Router();
 
 movieRouter.get("/", checkAuth, MovieController.getSaved);
-movieRouter.post("/save/:imdbID", checkAuth, MovieController.save);
+movieRouter.post("/save", checkAuth, MovieController.save);
 
 export default movieRouter;

@@ -3,7 +3,7 @@ import { NavigationProp } from "@react-navigation/native";
 
 import Logo from "./Logo";
 import Search from "./Search";
-import Screen from "../Screen";
+import Screen from "../UI/Screen";
 
 interface Props {
   navigation: NavigationProp<any>;

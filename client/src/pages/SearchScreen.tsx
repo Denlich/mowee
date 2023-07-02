@@ -26,6 +26,10 @@ const SearchScreen = ({ navigation }: Props) => {
     setReq(text);
   };
 
+  if (!movies) {
+    return null;
+  }
+
   return (
     <View style={{ flex: 1 }}>
       <SearchHeader

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { BASE_URL } from "@env";
 import authStore from "../stores/auth-store";
 
 const axiosInstance = axios.create({
-  baseURL: "https://mowee.onrender.com",
+  baseURL: BASE_URL,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -14,7 +15,7 @@ axiosInstance.interceptors.request.use((config) => {
 });
 
 class APIClient<T> {
-  endpoint: string;
+  private endpoint: string;
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
@@ -26,6 +27,16 @@ class APIClient<T> {
 
   getMe = () => {
     return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
+  };
+
+  save = (config: any) => {
+    return axiosInstance.post(this.endpoint, config).then((res) => {
+      res.data;
+    });
+  };
+
+  getSaved = () => {
+    return axiosInstance.get(this.endpoint).then((res) => res.data);
   };
 }
 

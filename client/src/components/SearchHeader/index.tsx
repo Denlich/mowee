@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { NavigationProp } from "@react-navigation/native";
 import { TextInput } from "react-native";
 
-import Screen from "../Screen";
+import Screen from "../UI/Screen";
 import SearchBox from "./SearchBox";
 import BackButton from "../UI/BackButton";
 
