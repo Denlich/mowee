@@ -3,7 +3,7 @@ import APIClient from "../services/api-client";
 
 interface SavedMovie {
   imdbID: string;
-  poster: string;
+  Poster: string;
 }
 
 const apiClient = new APIClient<SavedMovie[]>("/movie/");

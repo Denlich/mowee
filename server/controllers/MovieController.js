@@ -5,9 +5,9 @@ import MovieModel from "../models/Movie.js";
 class MovieController {
   save = async (req, res, next) => {
     try {
-      const { imdbID, poster } = req.body;
+      const { imdbID, Poster } = req.body;
       const userId = req.userId;
-      const result = await MovieService.save(imdbID, poster, userId);
+      const result = await MovieService.save(imdbID, Poster, userId);
       return res.status(200).json(result);
     } catch (e) {
       console.log(e);

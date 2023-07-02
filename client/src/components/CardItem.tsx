@@ -3,15 +3,12 @@ import {
   Image,
   TouchableWithoutFeedback,
   StyleSheet,
-  Dimensions,
   View,
 } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 
 import Movie from "../entities/Movie";
 import SaveButton from "./UI/SaveButton";
-
-const height = Dimensions.get("window").height;
 
 interface Props {
   item: Movie;
@@ -50,7 +47,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     width: "100%",
-    height: height * 0.6,
+    height: "100%",
     borderRadius: 25,
     overflow: "hidden",
     marginBottom: 20,

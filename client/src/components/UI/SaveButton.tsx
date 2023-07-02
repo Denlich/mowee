@@ -17,7 +17,7 @@ const SaveButton = ({ imdbID, Poster, isSaved }: Props) => {
 
   function handleSave() {
     setSaved(!saved);
-    apiClient.save({ imdbID: imdbID, poster: Poster });
+    apiClient.save({ imdbID, Poster });
   }
 
   return (

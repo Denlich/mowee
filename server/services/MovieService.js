@@ -1,7 +1,7 @@
 import MovieModal from "../models/Movie.js";
 
 class MovieService {
-  save = async (imdbID, poster, userId) => {
+  save = async (imdbID, Poster, userId) => {
     const movie = await MovieModal.findOne({ user: userId, imdbID: imdbID });
 
     if (movie) {
@@ -11,7 +11,7 @@ class MovieService {
 
     const saved = await MovieModal.create({
       imdbID,
-      poster,
+      Poster,
       user: userId,
     });
     return saved;

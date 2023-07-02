@@ -1,10 +1,12 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, View, Dimensions } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 
 import Movie from "../entities/Movie";
 import CardItem from "./CardItem";
 import useGetSaved from "../hooks/useGetSaved";
+
+const height = Dimensions.get("window").height * 0.6;
 
 interface Props {
   movies: Movie[];
@@ -20,11 +22,13 @@ const index = ({ movies, navigation }: Props) => {
     <FlatList
       data={movies}
       renderItem={({ item }) => (
-        <CardItem
-          item={item}
-          navigation={navigation}
-          isSaved={isMovieSaved(item.imdbID)}
-        />
+        <View style={{ height: height }}>
+          <CardItem
+            item={item}
+            navigation={navigation}
+            isSaved={isMovieSaved(item.imdbID)}
+          />
+        </View>
       )}
       keyExtractor={(item) => item.imdbID}
       contentContainerStyle={{

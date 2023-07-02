@@ -6,7 +6,7 @@ const movieSchema = Schema({
     required: true,
     unique: true,
   },
-  poster: {
+  Poster: {
     type: String,
     required: true,
   },
