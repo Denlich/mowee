@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Dimensions, FlatList, View } from "react-native";
+import { Dimensions, FlatList, View } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 
 import Layout from "../components/Layout";
-import useGetSaved from "../hooks/useGetSaved";
+import useSaved from "../hooks/useSaved";
 import CardItem from "../components/CardItem";
+import CategoryList from "../components/CategoryList";
 
 const height = Dimensions.get("window").height;
 
@@ -13,33 +14,39 @@ interface Props {
 }
 
 const SavedScreen = ({ navigation }: Props) => {
-  const savedMovies = useGetSaved();
+  const { data, isLoading } = useSaved();
 
-  if (!savedMovies) {
+  if (isLoading) {
     return null;
   }
 
   return (
     <Layout navigation={navigation}>
-      <Button
-        title="Some collection"
-        onPress={() => navigation.navigate("CollectionScreen")}
-      />
       <FlatList
-        data={savedMovies.data}
+        data={data}
         renderItem={({ item, index }) => (
           <View
             style={[
               { flex: 0.5, height: height / 3 },
-              index % 2 === 0 ? { marginRight: 5 } : { marginLeft: 5 },
+              index % 2 === 0 ? { marginRight: 2.5 } : { marginLeft: 2.5 },
             ]}
           >
-            <CardItem item={item} navigation={navigation} isSaved={true} />
+            <CardItem
+              item={item}
+              navigation={navigation}
+              isSaved={true}
+              searchCard={false}
+            />
           </View>
         )}
         keyExtractor={(item) => item.imdbID}
         numColumns={2}
         style={{ flex: 1 }}
+        nestedScrollEnabled
+        ListHeaderComponent={<CategoryList />}
+        ListHeaderComponentStyle={{ marginBottom: 5 }}
+        showsVerticalScrollIndicator={false}
+        overScrollMode="never"
       />
     </Layout>
   );

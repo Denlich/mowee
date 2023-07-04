@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 
 const apiClient = new APIClient<User>("/user/getMe");
 
-const useGetMe = () => {
+const useMe = () => {
   return useQuery({
     queryKey: ["me"],
-    queryFn: () => apiClient.getMe(),
+    queryFn: apiClient.get,
   });
 };
 
-export default useGetMe;
+export default useMe;

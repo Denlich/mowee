@@ -6,14 +6,14 @@ import Layout from "../components/Layout";
 import UserInfo from "../components/UserInfo";
 import MoviesGroup from "../components/MoviesGroup";
 import ProfileFooter from "../components/ProfileFooter";
-import useGetMe from "../hooks/useGetMe";
+import useMe from "../hooks/useMe";
 
 interface Props {
   navigation: NavigationProp<any>;
 }
 
 const ProfileScreen = ({ navigation }: Props) => {
-  const { data } = useGetMe();
+  const { data } = useMe();
 
   return (
     <Layout navigation={navigation} styles={styles.container}>

@@ -1,17 +1,17 @@
 import React from "react";
 import { View } from "react-native";
-import CategoryBox from "./CategoryBox";
+import CollectionBox from "./CollectionBox";
 
 const MoviesGroup = () => {
   return (
     <View>
-      <CategoryBox icon="time-outline" name="Recently watched" />
-      <CategoryBox
+      <CollectionBox icon="time-outline" name="Recently watched" />
+      <CollectionBox
         icon="bookmark-outline"
         name="Saved movies"
         styles={{ marginVertical: 20 }}
       />
-      <CategoryBox icon="star-outline" name="Rated movies" />
+      <CollectionBox icon="star-outline" name="Rated movies" />
     </View>
   );
 };

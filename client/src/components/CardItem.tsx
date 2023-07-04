@@ -7,23 +7,24 @@ import {
 } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 
-import Movie from "../entities/Movie";
 import SaveButton from "./UI/SaveButton";
+import SavedMovie from "../entities/SavedMovie";
 
 interface Props {
-  item: Movie;
+  item: SavedMovie;
   navigation: NavigationProp<any>;
   isSaved: boolean;
+  searchCard?: boolean;
 }
 
-const CardItem = ({ item, navigation, isSaved }: Props) => {
+const CardItem = ({ item, navigation, isSaved, searchCard = true }: Props) => {
   return (
     <TouchableWithoutFeedback
       onPress={() =>
         navigation.navigate("DetailsScreen", { imdbID: item.imdbID, isSaved })
       }
     >
-      <View style={styles.card}>
+      <View style={[styles.card, searchCard ? styles.search : styles.saved]}>
         {item.Poster ? (
           <Image
             source={{ uri: item.Poster }}
@@ -31,7 +32,12 @@ const CardItem = ({ item, navigation, isSaved }: Props) => {
             style={{ flex: 1 }}
           />
         ) : null}
-        <View style={styles.overlay}>
+        <View
+          style={[
+            styles.overlay,
+            searchCard ? { padding: 20 } : { padding: 5 },
+          ]}
+        >
           <SaveButton
             imdbID={item.imdbID}
             Poster={item.Poster}
@@ -48,9 +54,15 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    borderRadius: 25,
     overflow: "hidden",
+  },
+  search: {
+    borderRadius: 25,
     marginBottom: 20,
+  },
+  saved: {
+    borderRadius: 10,
+    marginBottom: 5,
   },
   overlay: {
     position: "absolute",
@@ -59,7 +71,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    padding: 20,
     backgroundColor: "rgba(0, 0, 0, .2)",
   },
 });

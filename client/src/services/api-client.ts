@@ -25,18 +25,12 @@ class APIClient<T> {
     return axiosInstance.post(this.endpoint, config).then((res) => res.data);
   };
 
-  getMe = () => {
+  get = () => {
     return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
   };
 
   save = (config: any) => {
-    return axiosInstance.post(this.endpoint, config).then((res) => {
-      res.data;
-    });
-  };
-
-  getSaved = () => {
-    return axiosInstance.get(this.endpoint).then((res) => res.data);
+    return axiosInstance.post(this.endpoint, config).then((res) => res.data);
   };
 }
 
