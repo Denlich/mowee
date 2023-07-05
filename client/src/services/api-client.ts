@@ -30,7 +30,7 @@ class APIClient<T> {
   };
 
   save = (config: any) => {
-    return axiosInstance.post(this.endpoint, config).then((res) => res.data);
+    return axiosInstance.post<T>(this.endpoint, config).then((res) => res.data);
   };
 }
 

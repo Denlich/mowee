@@ -39,8 +39,8 @@ const CardItem = ({ item, navigation, isSaved, searchCard = true }: Props) => {
           ]}
         >
           <SaveButton
-            imdbID={item.imdbID}
-            Poster={item.Poster}
+            imdbID={item.imdbID!}
+            Poster={item.Poster!}
             isSaved={isSaved}
           />
         </View>

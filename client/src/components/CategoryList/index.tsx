@@ -8,7 +8,7 @@ const index = () => {
   const { data, isLoading } = useCollections();
 
   if (isLoading) {
-    return null;
+    return <CreateButton handlePress={() => {}} />;
   }
 
   return (

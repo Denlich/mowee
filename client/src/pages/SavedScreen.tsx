@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Dimensions, FlatList, View } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
+import { useQueryClient } from "@tanstack/react-query";
 
 import Layout from "../components/Layout";
 import useSaved from "../hooks/useSaved";
 import CardItem from "../components/CardItem";
 import CategoryList from "../components/CategoryList";
+import useSavedMoviesStore from "../stores/saved-movies-store";
 
 const height = Dimensions.get("window").height;
 
@@ -14,7 +16,23 @@ interface Props {
 }
 
 const SavedScreen = ({ navigation }: Props) => {
-  const { data, isLoading } = useSaved();
+  const { data, isLoading, refetch } = useSaved();
+  const setSavedMovies = useSavedMoviesStore((m) => m.setSavedMovies);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      refetch();
+    });
+    return unsubscribe;
+  }, [navigation, refetch]);
+
+  useEffect(() => {
+    if (data) {
+      setSavedMovies(data);
+      queryClient.setQueryData(["movies"], data);
+    }
+  }, [data, setSavedMovies, queryClient]);
 
   if (isLoading) {
     return null;
@@ -23,7 +41,7 @@ const SavedScreen = ({ navigation }: Props) => {
   return (
     <Layout navigation={navigation}>
       <FlatList
-        data={data}
+        data={useSavedMoviesStore().savedMovies}
         renderItem={({ item, index }) => (
           <View
             style={[

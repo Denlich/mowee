@@ -3,8 +3,10 @@ import { TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import APIClient from "../../services/api-client";
+import SavedMovie from "../../entities/SavedMovie";
+import useSavedMoviesStore from "../../stores/saved-movies-store";
 
-const apiClient = new APIClient("/movie/save");
+const apiClient = new APIClient<SavedMovie>("/movie/save");
 
 interface Props {
   imdbID: string;
@@ -14,11 +16,15 @@ interface Props {
 
 const SaveButton = ({ imdbID, Poster, isSaved }: Props) => {
   const [saved, setSaved] = useState(isSaved);
+  const addMovie = useSavedMoviesStore((s) => s.addMovie);
+  const deleteMovie = useSavedMoviesStore((s) => s.deleteMovie);
 
-  function handleSave() {
+  const handleSave = async () => {
     setSaved(!saved);
-    apiClient.save({ imdbID, Poster });
-  }
+    const movie = await apiClient.save({ imdbID, Poster });
+    if (movie.imdbID) addMovie(movie);
+    else deleteMovie(imdbID);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={handleSave}>
