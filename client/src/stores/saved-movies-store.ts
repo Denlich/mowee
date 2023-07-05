@@ -12,7 +12,7 @@ const useSavedMoviesStore = create<SavedMoviesStore>((set) => ({
   savedMovies: [],
   setSavedMovies: (movies) => set(() => ({ savedMovies: movies })),
   addMovie: (movie) =>
-    set((store) => ({ savedMovies: [...store.savedMovies, movie] })),
+    set((store) => ({ savedMovies: [movie, ...store.savedMovies] })),
   deleteMovie: (imdbID) =>
     set((store) => ({
       savedMovies: store.savedMovies.filter((m) => m.imdbID !== imdbID),

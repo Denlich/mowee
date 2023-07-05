@@ -17,7 +17,9 @@ class MovieController {
 
   getSaved = async (req, res, next) => {
     try {
-      const movies = await MovieModel.find({ user: req.userId });
+      const movies = await MovieModel.find({ user: req.userId }).sort({
+        createdAt: -1,
+      });
       return res.json(movies);
     } catch (e) {
       console.log(e);

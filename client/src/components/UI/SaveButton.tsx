@@ -22,6 +22,7 @@ const SaveButton = ({ imdbID, Poster, isSaved }: Props) => {
   const handleSave = async () => {
     setSaved(!saved);
     const movie = await apiClient.save({ imdbID, Poster });
+
     if (movie.imdbID) addMovie(movie);
     else deleteMovie(imdbID);
   };
