@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  Touchable,
+  TouchableWithoutFeedback,
+  View,
+  ViewStyle,
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Paragraph from "./UI/Paragraph";
 
@@ -8,6 +15,7 @@ interface Props {
   icon?: string;
   styles?: StyleProp<ViewStyle>;
   amount: number;
+  handleClick: () => void;
 }
 
 const CollectionBox = ({
@@ -15,15 +23,18 @@ const CollectionBox = ({
   icon = "folder-outline",
   styles,
   amount,
+  handleClick,
 }: Props) => {
   return (
-    <View style={[localStyles.container, styles]}>
-      <View style={localStyles.title}>
-        <Icon name={icon} size={24} />
-        <Paragraph styles={{ marginLeft: 10 }}>{name}</Paragraph>
+    <TouchableWithoutFeedback onPress={handleClick}>
+      <View style={[localStyles.container, styles]}>
+        <View style={localStyles.title}>
+          <Icon name={icon} size={24} />
+          <Paragraph styles={{ marginLeft: 10 }}>{name}</Paragraph>
+        </View>
+        <Paragraph color="grey">{String(amount)}</Paragraph>
       </View>
-      <Paragraph color="grey">{String(amount)}</Paragraph>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

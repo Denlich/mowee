@@ -18,7 +18,7 @@ const ProfileScreen = ({ navigation }: Props) => {
   return (
     <Layout navigation={navigation} styles={styles.container}>
       <UserInfo name={data?.name!} username={data?.username!} />
-      <MoviesGroup />
+      <MoviesGroup navigation={navigation} />
       <ProfileFooter />
     </Layout>
   );
