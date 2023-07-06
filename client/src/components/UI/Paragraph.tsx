@@ -4,7 +4,7 @@ import { Text, StyleSheet, TextStyle, StyleProp } from "react-native";
 interface Props {
   children: string | string[];
   styles?: StyleProp<TextStyle>;
-  color?: "black" | "grey";
+  color?: "black" | "grey" | "white";
 }
 
 const Paragraph = ({ children, color = "black", styles }: Props) => {

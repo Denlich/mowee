@@ -1,12 +1,14 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, StyleProp, TextStyle } from "react-native";
 
 interface Props {
   children: string;
+  color?: "white" | "black";
+  style?: StyleProp<TextStyle>;
 }
 
-const Heading = ({ children }: Props) => {
-  return <Text style={styles.text}>{children}</Text>;
+const Heading = ({ children, color = "black", style }: Props) => {
+  return <Text style={[styles.text, { color: color }, style]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({

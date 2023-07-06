@@ -1,55 +1,45 @@
 import React from "react";
-import { ScrollView, Image, View, Dimensions } from "react-native";
+import { Animated } from "react-native";
+import { NavigationProp, RouteProp } from "@react-navigation/native";
 
 import Movie from "../../entities/Movie";
-import Heading from "../UI/Heading";
-import Genres from "./Genres";
-import Paragraph from "../UI/Paragraph";
-
-const height = Dimensions.get("window").height;
+import ImageContainer from "./ImageContainer";
+import DetailsContainer from "./DetailsContainer";
 
 interface Props {
   movie: Movie;
+  scrollY: Animated.Value;
+  height: number;
+  route: RouteProp<any>;
+  navigation: NavigationProp<any>;
 }
 
-const index = ({ movie }: Props) => {
+const index = ({ movie, scrollY, height, route, navigation }: Props) => {
   if (!movie) {
     return null;
   }
 
-  const excludedKeys = [
-    "Title",
-    "Genre",
-    "Plot",
-    "Poster",
-    "Runtime",
-    "imdbID",
-    "Ratings",
-  ];
-
   return (
-    <ScrollView>
-      <Image
-        source={{ uri: movie?.Poster }}
-        style={{ width: "100%", height: height * 0.7 }}
+    <Animated.ScrollView
+      showsVerticalScrollIndicator={false}
+      bounces={false}
+      bouncesZoom={false}
+      nestedScrollEnabled
+      overScrollMode="never"
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+        { useNativeDriver: true }
+      )}
+    >
+      <ImageContainer
+        movie={movie}
+        navigation={navigation}
+        route={route}
+        height={height}
+        scrollY={scrollY}
       />
-      <View style={{ padding: 40 }}>
-        <Heading>{movie?.Title!}</Heading>
-        <Genres genre={movie?.Genre!} />
-        <Paragraph color="grey">Runtime: {movie?.Runtime!}</Paragraph>
-        <Paragraph styles={{ marginVertical: 40 }}>{movie?.Plot!}</Paragraph>
-        {Object.entries(movie).map(([key, value]) => {
-          if (!excludedKeys.includes(key)) {
-            return (
-              <Paragraph color="grey" styles={{ marginBottom: 10 }} key={key}>
-                {`${key}: ${value}`}
-              </Paragraph>
-            );
-          }
-          return null;
-        })}
-      </View>
-    </ScrollView>
+      <DetailsContainer movie={movie} scrollY={scrollY} />
+    </Animated.ScrollView>
   );
 };
 
