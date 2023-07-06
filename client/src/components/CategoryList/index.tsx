@@ -1,23 +1,17 @@
 import React from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { NavigationProp } from "@react-navigation/native";
 
 import CreateButton from "./CreateButton";
-import useCollections from "../../hooks/useCollections";
 import CollectionBox from "../CollectionBox";
-import useCollectionsStore from "../../stores/collections-store";
+import Collection from "../../entities/Collection";
 
-const index = () => {
-  const { data, isLoading } = useCollections();
-  const queryClient = useQueryClient();
-  const setCollection = useCollectionsStore((s) => s.setCollections);
+interface Props {
+  navigation: NavigationProp<any>;
+  collections: Collection[];
+  isLoading: boolean;
+}
 
-  React.useEffect(() => {
-    if (data) {
-      setCollection(data);
-      queryClient.setQueryData(["collections"], data);
-    }
-  }, [data, setCollection, queryClient]);
-
+const index = ({ navigation, collections, isLoading }: Props) => {
   if (isLoading) {
     return <CreateButton />;
   }
@@ -25,13 +19,15 @@ const index = () => {
   return (
     <>
       <CreateButton />
-      {useCollectionsStore().collections.map((item) => (
+      {collections.map((item) => (
         <CollectionBox
           key={item._id}
           name={item.title}
           amount={item.movies.length}
           styles={{ marginTop: 5 }}
-          handleClick={() => {}}
+          handleClick={() =>
+            navigation.navigate("CollectionScreen", { movies: item.movies })
+          }
         />
       ))}
     </>
