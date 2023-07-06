@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, FlatList, View } from "react-native";
+import { Dimensions, FlatList, StyleProp, View, ViewStyle } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 import { UseQueryResult } from "@tanstack/react-query";
 
@@ -12,13 +12,29 @@ const height = Dimensions.get("window").height;
 
 interface Props {
   navigation: NavigationProp<any>;
-  collection: UseQueryResult<Collection[], unknown>;
+  collection?: UseQueryResult<Collection[], unknown>;
+  data?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
-const SavedList = ({ navigation, collection }: Props) => {
+const SavedList = ({ navigation, collection, data, style }: Props) => {
+  const renderListHeader = () => {
+    if (!collection || !collection.data) {
+      return null;
+    }
+
+    return (
+      <CategoryList
+        collections={collection.data}
+        isLoading={collection.isLoading}
+        navigation={navigation}
+      />
+    );
+  };
+
   return (
     <FlatList
-      data={useSavedMoviesStore((s) => s.savedMovies)}
+      data={data ? data : useSavedMoviesStore((s) => s.savedMovies)}
       renderItem={({ item, index }) => (
         <View
           style={[
@@ -38,16 +54,11 @@ const SavedList = ({ navigation, collection }: Props) => {
       numColumns={2}
       style={{ flex: 1 }}
       nestedScrollEnabled
-      ListHeaderComponent={() => (
-        <CategoryList
-          collections={collection.data!}
-          isLoading={collection.isLoading}
-          navigation={navigation}
-        />
-      )}
+      ListHeaderComponent={renderListHeader}
       ListHeaderComponentStyle={{ marginBottom: 5 }}
       showsVerticalScrollIndicator={false}
       overScrollMode="never"
+      contentContainerStyle={style}
     />
   );
 };

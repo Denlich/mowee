@@ -26,7 +26,7 @@ const index = ({ navigation, collections, isLoading }: Props) => {
           amount={item.movies.length}
           styles={{ marginTop: 5 }}
           handleClick={() =>
-            navigation.navigate("CollectionScreen", { movies: item.movies })
+            navigation.navigate("CollectionScreen", { collection: item._id })
           }
         />
       ))}

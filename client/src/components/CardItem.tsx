@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "flex-end",
-    backgroundColor: "rgba(0, 0, 0, .2)",
+    backgroundColor: "rgba(0, 0, 0, .15)",
   },
 });
 

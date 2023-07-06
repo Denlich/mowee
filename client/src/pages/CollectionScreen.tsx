@@ -1,10 +1,11 @@
 import React from "react";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { View } from "react-native";
 
-import Screen from "../components/UI/Screen";
-import SavedMovie from "../entities/SavedMovie";
 import Paragraph from "../components/UI/Paragraph";
-import CardItem from "../components/CardItem";
+import useCollection from "../hooks/useCollection";
+import SavedList from "../components/SavedList";
+import CollectionHeader from "../components/CollectionHeader";
 
 interface CollectionProps {
   route: RouteProp<any>;
@@ -12,23 +13,34 @@ interface CollectionProps {
 }
 
 const CollectionScreen = ({ route, navigation }: CollectionProps) => {
-  const { movies } = route.params!;
+  const { collection } = route.params!;
+  const { data, isLoading } = useCollection(collection);
 
-  if (!movies) {
+  if (!collection) {
     return null;
   }
 
-  if (movies.length === 0) {
+  if (isLoading) {
+    return null;
+  }
+
+  if (!data) {
+    return <Paragraph>Some error</Paragraph>;
+  }
+
+  if (data.movies.length === 0) {
     return <Paragraph>No movies yet</Paragraph>;
   }
 
   return (
-    <Screen>
-      {movies.map((movie: SavedMovie) =>
-        // <CardItem isSaved={true} item={movie} navigation={navigation} />
-        console.log(movie)
-      )}
-    </Screen>
+    <View style={{ flex: 1 }}>
+      <CollectionHeader title={data.title} navigation={navigation} />
+      <SavedList
+        navigation={navigation}
+        data={data.movies}
+        style={{ paddingHorizontal: 40 }}
+      />
+    </View>
   );
 };
 

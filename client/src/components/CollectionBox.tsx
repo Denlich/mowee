@@ -3,6 +3,7 @@ import {
   StyleProp,
   StyleSheet,
   Touchable,
+  TouchableNativeFeedback,
   TouchableWithoutFeedback,
   View,
   ViewStyle,
@@ -26,26 +27,31 @@ const CollectionBox = ({
   handleClick,
 }: Props) => {
   return (
-    <TouchableWithoutFeedback onPress={handleClick}>
-      <View style={[localStyles.container, styles]}>
-        <View style={localStyles.title}>
-          <Icon name={icon} size={24} />
-          <Paragraph styles={{ marginLeft: 10 }}>{name}</Paragraph>
+    <View style={[localStyles.box, styles]}>
+      <TouchableNativeFeedback onPress={handleClick}>
+        <View style={localStyles.container}>
+          <View style={localStyles.title}>
+            <Icon name={icon} size={24} />
+            <Paragraph styles={{ marginLeft: 10 }}>{name}</Paragraph>
+          </View>
+          <Paragraph color="grey">{String(amount)}</Paragraph>
         </View>
-        <Paragraph color="grey">{String(amount)}</Paragraph>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableNativeFeedback>
+    </View>
   );
 };
 
 const localStyles = StyleSheet.create({
+  box: {
+    borderRadius: 10,
+    overflow: "hidden",
+  },
   container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
-    borderRadius: 10,
     padding: 20,
   },
   title: {

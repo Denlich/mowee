@@ -16,7 +16,7 @@ class CollectionController {
       const { title } = req.body;
       const userId = req.userId;
       const collection = await CollectionModel.create({ title, user: userId });
-      res.status(200).json(collection);
+      return res.status(200).json(collection);
     } catch (e) {
       console.log(e);
       next(e);
@@ -25,8 +25,26 @@ class CollectionController {
 
   getSome = async (req, res, next) => {
     try {
-      const collecion = await CollectionModel.findOne({ _id: req.params.id });
-      res.status(200).json(collecion);
+      const collecion = await CollectionModel.findOne({
+        user: req.userId,
+        _id: req.params.id,
+      }).populate("movies");
+      return res.status(200).json(collecion);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
+  };
+
+  addToCollection = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const movie = req.body.movie;
+      const collection = await CollectionModel.findOneAndUpdate(
+        { _id: id, user: req.userId, movies: { $ne: movie } },
+        { $push: { movies: movie } }
+      );
+      return res.status(200).json(collection);
     } catch (e) {
       console.log(e);
       next(e);
