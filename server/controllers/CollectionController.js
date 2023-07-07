@@ -29,6 +29,7 @@ class CollectionController {
         user: req.userId,
         _id: req.params.id,
       }).populate("movies");
+      console.log(collecion);
       return res.status(200).json(collecion);
     } catch (e) {
       console.log(e);
@@ -44,6 +45,20 @@ class CollectionController {
         { _id: id, user: req.userId, movies: { $ne: movie } },
         { $push: { movies: movie } }
       );
+      return res.status(200).json(collection);
+    } catch (e) {
+      console.log(e);
+      next(e);
+    }
+  };
+
+  delete = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const collection = await CollectionModel.deleteOne({
+        _id: id,
+        user: req.userId,
+      });
       return res.status(200).json(collection);
     } catch (e) {
       console.log(e);

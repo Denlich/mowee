@@ -22,6 +22,7 @@ const index = ({ navigation, collections, isLoading }: Props) => {
       {collections.map((item) => (
         <CollectionBox
           key={item._id}
+          id={item._id}
           name={item.title}
           amount={item.movies.length}
           styles={{ marginTop: 5 }}

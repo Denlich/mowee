@@ -7,6 +7,7 @@ import CardItem from "./CardItem";
 import CategoryList from "./CategoryList";
 import useSavedMoviesStore from "../stores/saved-movies-store";
 import Collection from "../entities/Collection";
+import useCollectionsStore from "../stores/collections-store";
 
 const height = Dimensions.get("window").height;
 
@@ -25,7 +26,7 @@ const SavedList = ({ navigation, collection, data, style }: Props) => {
 
     return (
       <CategoryList
-        collections={collection.data}
+        collections={useCollectionsStore((s) => s.collections)}
         isLoading={collection.isLoading}
         navigation={navigation}
       />

@@ -7,12 +7,12 @@ import useCollection from "../hooks/useCollection";
 import SavedList from "../components/SavedList";
 import CollectionHeader from "../components/CollectionHeader";
 
-interface CollectionProps {
+interface Props {
   route: RouteProp<any>;
   navigation: NavigationProp<any>;
 }
 
-const CollectionScreen = ({ route, navigation }: CollectionProps) => {
+const CollectionScreen = ({ route, navigation }: Props) => {
   const { collection } = route.params!;
   const { data, isLoading } = useCollection(collection);
 

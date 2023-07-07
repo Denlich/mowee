@@ -12,5 +12,6 @@ collectionRouter.put(
   checkAuth,
   CollectionController.addToCollection
 );
+collectionRouter.delete("/delete/:id", checkAuth, CollectionController.delete);
 
 export default collectionRouter;

@@ -5,15 +5,12 @@ const collectionSchema = Schema({
     type: String,
     required: true,
   },
-  movies: {
-    type: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Movie",
-      },
-    ],
-    default: [],
-  },
+  movies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Movie",
+    },
+  ],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

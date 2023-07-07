@@ -32,6 +32,12 @@ class APIClient<T> {
   save = (config: any) => {
     return axiosInstance.post<T>(this.endpoint, config).then((res) => res.data);
   };
+
+  delete = (id: string) => {
+    return axiosInstance
+      .delete(this.endpoint + "/" + id)
+      .then((res) => res.data);
+  };
 }
 
 export default APIClient;

@@ -16,10 +16,11 @@ interface Props {
 const SavedScreen = ({ navigation }: Props) => {
   const saved = useSaved();
   const setSavedMovies = useSavedMoviesStore((m) => m.setSavedMovies);
-  const queryClient = useQueryClient();
 
   const collection = useCollections();
   const setCollection = useCollectionsStore((s) => s.setCollections);
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
